@@ -1,3 +1,29 @@
-body {
-    background-color: red;
+
+color {
+    color: bg-light;
+}
+
+
+.my-2 {
+    margin-top: -2 !important;
+}
+
+.mr0{
+    margin-right: 0 !important ;
+
+}
+.sm0{
+    --breakpoint-sm: 0 !important;
+}
+
+.lg{
+    --breakpoint-lg: -0;
+}
+
+.my{
+    margin-bottom: 0 !important;
+}
+
+.sm{
+    --breakpoint-sm: 0;
 }

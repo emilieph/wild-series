@@ -9,6 +9,19 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
+    .copyFiles({
+                 from: './assets/images',
+
+                 // optional target path, relative to the output dir
+                 //to: 'images/[path][name].[ext]',
+
+                 // if versioning is enabled, add the file hash too
+                 //to: 'images/[path][name].[hash:8].[ext]',
+
+                 // only copy files matching this pattern
+                 //pattern: /\.(png|jpg|jpeg)$/
+            })
+
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
@@ -54,9 +67,15 @@ Encore
     })
 
     // enables Sass/SCSS support
-    //.enableSassLoader()
+    .enableSassLoader()
 
-    // uncomment if you use TypeScript
+    // processes files ending in .less
+    .enableLessLoader()
+
+    // processes files ending in .styl
+    .enableStylusLoader()
+
+// uncomment if you use TypeScript
     //.enableTypeScriptLoader()
 
     // uncomment to get integrity="..." attributes on your script & link tags
@@ -64,7 +83,7 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
