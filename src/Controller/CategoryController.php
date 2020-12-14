@@ -17,34 +17,34 @@ class CategoryController extends AbstractController
      */
     public function index(): Response
     {
-        $programs = $this->getDoctrine()
+        $categories = $this->getDoctrine()
             ->getRepository(Category::class)
             ->findAll();
         return $this->render(
             'category/index.html.twig',
-            ['programs' => $programs]
+            ['categories' => $categories]
         );
     }
 
     /**
      * Getting a program by category name
      *
-     * @Route("/categories/{categoryName}", name="category_show)")
+     * @Route("/categoryName}", name="category_show)")
      * @param string $categoryName
      * @return Response
      */
     public function show(string $categoryName):Response
     {
         $program = $this->getDoctrine()
-            ->getRepository(Program::class)
+            ->getRepository(Category::class)
             ->findBy(['name' => $categoryName]);
-        if (!$program) {
+        if (!$categoryName) {
             throw $this->createNotFoundException(
-                'No program with id : ' . $id . ' found in program\'s table.'
+                'No program with id : ' . $categoryName . ' found in program\'s table.'
             );
         }
-        return $this->render('program/show.html.twig', [
-                'program' => $program,]
+        return $this->render('category/show.html.twig', [
+                'category' => $categoryName,]
         );
     }
 }
