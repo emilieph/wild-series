@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All categories{% endblock %}
+{% block content %}
+    <h1>Toutes les séries de la table category : </h1>
+    {% for category in categories %}
+        <div>
+            <h2>{{ loop.index }} / {{ category.title }} - Catégorie : {{ program.category.name }}</h2>
+            <p>{{ category.name }}</p>
+        </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+    <a href="{{ path('category_index') }}">
+        Retour à l'accueil
+    </a>
+{% endblock %}
+
+{% block for %}
+    {% for category in categories %}
+        <div>
+            <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ category.name }}</h2>
+            <p>{{ category.name }}</p>
+            {# Lien vers la fiche de la série : #}
+            <a href="{{ path("category_show", { id: program.id }) }}">Voir la fiche</a>
+        </div>
+    {% endfor %}
+{% endblock %}
+

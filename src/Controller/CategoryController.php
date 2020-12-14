@@ -1,45 +1,43 @@
 <?php
-
-// App/src/Controller/ProgramController.php
+// App/src/Controller/CategoryController.php
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Program;
-/**
- * @Route("/programs", name="program_")
- */
-Class ProgramController extends AbstractController
+use App\Entity\Category;
+
+class CategoryController extends AbstractController
 {
     /**
-     * Show all rows from Program’s entity
+     * Get all category in db
      *
-     * @Route("/", name="index")
+     * @Route("/", name="category_index")
      * @return Response A response instance
      */
     public function index(): Response
     {
         $programs = $this->getDoctrine()
-            ->getRepository(Program::class)
+            ->getRepository(Category::class)
             ->findAll();
         return $this->render(
-            'program/index.html.twig',
+            'category/index.html.twig',
             ['programs' => $programs]
         );
     }
 
     /**
-     * Getting a program by id
+     * Getting a program by category name
      *
-     * @Route("/show/{id<^[0-9]+$>}", name="show")
+     * @Route("/categories/{categoryName}", name="category_show)")
+     * @param string $categoryName
      * @return Response
      */
-    public function show(int $id):Response
+    public function show(string $categoryName):Response
     {
         $program = $this->getDoctrine()
             ->getRepository(Program::class)
-            ->findOneBy(['id' => $id]);
+            ->findBy(['name' => $categoryName]);
         if (!$program) {
             throw $this->createNotFoundException(
                 'No program with id : ' . $id . ' found in program\'s table.'
@@ -48,4 +46,5 @@ Class ProgramController extends AbstractController
         return $this->render('program/show.html.twig', [
                 'program' => $program,]
         );
-    }}
+    }
+}
